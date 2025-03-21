@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.3</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.onlinebookstore</groupId>
+    <artifactId>Interswitch</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
+    <name>Interswitch</name>
+    <description>Interswitch</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+    <properties>
+        <java.version>17</java.version>
+        <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
+        <javax.validation.version>1.1.0.Final</javax.validation.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <postgresql.version>42.6.0</postgresql.version>
+        <flyway-core.version>7.15.0</flyway-core.version>
+        <error-prone.version>2.18.0</error-prone.version>
+        <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
+        <checkstyle.version>10.1</checkstyle.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Database -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${postgresql.version}</version>
+        </dependency>
+
+        <!-- Database Migration -->
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>${flyway-core.version}</version>
+        </dependency>
+
+
+        <!--Lombok-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Web -->
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <version>${springdoc-openapi-ui.version}</version>
+        </dependency>
+
+        <!-- Utilities -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>${javax.validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
+        </dependency>
+
+        <!-- Quality Checks -->
+        <dependency>
+            <groupId>com.google.errorprone</groupId>
+            <artifactId>error_prone_core</artifactId>
+            <version>${error-prone.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <excludes>
+                        <exclude>%regex[.*Integration.*]</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${maven-checkstyle-plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.puppycrawl.tools</groupId>
+                        <artifactId>checkstyle</artifactId>
+                        <version>${checkstyle.version}</version>
+                    </dependency>
+                </dependencies>
+                <configuration>
+                    <configLocation>checkstyle.xml</configLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>com.google.errorprone</groupId>
+                        <artifactId>error_prone_core</artifactId>
+                        <version>${error-prone.version}</version>
+                    </dependency>
+                </dependencies>
+
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </path>
+                    </annotationProcessorPaths>
+
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <compilerArgs combine.children="append">
+                        <arg>-XDcompilePolicy=simple</arg>
+                        <arg>
+                            -Xplugin:ErrorProne \
+
+                            -XepExcludedPaths:.*/target/generated-(|test-)sources/.* \
+                            -XepDisableWarningsInGeneratedCode \
+
+                            -Xep:BadInstanceof:ERROR \
+                            -Xep:BoxedPrimitiveConstructor:ERROR \
+                            -Xep:CheckedExceptionNotThrown:ERROR \
+                            -Xep:ClassCanBeStatic:ERROR \
+                            -Xep:CompareToZero:ERROR \
+                            -Xep:DefaultCharset:ERROR \
+                            -Xep:EqualsIncompatibleType:ERROR \
+                            -Xep:FallThrough:ERROR \
+                            -Xep:Finally:ERROR \
+                            -Xep:HidingField:ERROR \
+                            -Xep:ImmutableSetForContains:ERROR \
+                            -Xep:MissingOverride:ERROR \
+                            -Xep:NullOptional:ERROR \
+                            -Xep:ObjectToString:ERROR \
+                            -Xep:UnnecessaryMethodReference:ERROR \
+                            -Xep:UnnecessaryParentheses:ERROR \
+                            -Xep:UnusedVariable:ERROR \
+                            -Xep:JavaTimeDefaultTimeZone:ERROR \
+                            -Xep:UnnecessarilyUsedValue:ERROR \
+                            -Xep:UnqualifiedYield:ERROR \
+                            -Xep:StatementSwitchToExpressionSwitch:ERROR \
+                            -Xep:MathAbsoluteNegative:ERROR \
+                            -Xep:IgnoredPureGetter:ERROR \
+                            -Xep:Finalize:ERROR \
+                            -Xep:AvoidObjectArrays:ERROR \
+                            -Xep:YodaCondition:ERROR \
+                            -Xep:UnusedLabel:ERROR \
+                            -Xep:LabelledBreakTarget:ERROR \
+                            -Xep:JdkObsolete:ERROR \
+                            -Xep:StringSplitter:ERROR \
+                            -Xep:InlineFormatString:ERROR \
+                            -Xep:UnrecognisedJavadocTag:ERROR \
+                            -Xep:EmptyBlockTag:ERROR \
+                            -Xep:BadComparable:ERROR \
+                            -Xep:CatchAndPrintStackTrace:ERROR \
+                            -Xep:ModifyCollectionInEnhancedForLoop:ERROR \
+                            -Xep:ArrayAsKeyOfSetOrMap:ERROR \
+                        </arg>
+                        <!-- remove <arg>-Werror</arg> to disable stopping of compilation on warning-->
+                        <!--                        <arg>-Werror</arg>-->
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
