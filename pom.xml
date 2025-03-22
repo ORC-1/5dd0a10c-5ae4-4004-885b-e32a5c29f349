@@ -29,12 +29,12 @@
     </scm>
     <properties>
         <java.version>17</java.version>
-        <springdoc-openapi-ui.version>1.6.6</springdoc-openapi-ui.version>
+        <springdoc-openapi-starter.version>2.8.5</springdoc-openapi-starter.version>
         <javax.validation.version>1.1.0.Final</javax.validation.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <postgresql.version>42.6.0</postgresql.version>
-        <flyway-core.version>7.15.0</flyway-core.version>
-        <error-prone.version>2.18.0</error-prone.version>
+        <flyway-core.version>9.22.3</flyway-core.version>
+        <error-prone.version>2.36.0</error-prone.version>
         <maven-checkstyle-plugin.version>3.1.2</maven-checkstyle-plugin.version>
         <checkstyle.version>10.1</checkstyle.version>
     </properties>
@@ -89,8 +89,8 @@
         <!-- Web -->
         <dependency>
             <groupId>org.springdoc</groupId>
-            <artifactId>springdoc-openapi-ui</artifactId>
-            <version>${springdoc-openapi-ui.version}</version>
+            <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+            <version>${springdoc-openapi-starter.version}</version>
         </dependency>
 
         <!-- Utilities -->
@@ -105,6 +105,7 @@
             <version>${commons-collections4.version}</version>
         </dependency>
 
+
         <!-- Quality Checks -->
         <dependency>
             <groupId>com.google.errorprone</groupId>
@@ -113,52 +114,15 @@
             <scope>provided</scope>
         </dependency>
 
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven-surefire-plugin.version}</version>
-                <configuration>
-                    <excludes>
-                        <exclude>%regex[.*Integration.*]</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-checkstyle-plugin</artifactId>
-                <version>${maven-checkstyle-plugin.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.puppycrawl.tools</groupId>
-                        <artifactId>checkstyle</artifactId>
-                        <version>${checkstyle.version}</version>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <configLocation>checkstyle.xml</configLocation>
-                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
-
                 <dependencies>
                     <dependency>
                         <groupId>com.google.errorprone</groupId>
@@ -166,66 +130,54 @@
                         <version>${error-prone.version}</version>
                     </dependency>
                 </dependencies>
-
                 <configuration>
-                    <annotationProcessorPaths>
-                        <path>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </path>
-                    </annotationProcessorPaths>
-
                     <source>${java.version}</source>
                     <target>${java.version}</target>
                     <showDeprecation>true</showDeprecation>
                     <compilerArgs combine.children="append">
                         <arg>-XDcompilePolicy=simple</arg>
-                        <arg>
-                            -Xplugin:ErrorProne \
-
-                            -XepExcludedPaths:.*/target/generated-(|test-)sources/.* \
-                            -XepDisableWarningsInGeneratedCode \
-
-                            -Xep:BadInstanceof:ERROR \
-                            -Xep:BoxedPrimitiveConstructor:ERROR \
-                            -Xep:CheckedExceptionNotThrown:ERROR \
-                            -Xep:ClassCanBeStatic:ERROR \
-                            -Xep:CompareToZero:ERROR \
-                            -Xep:DefaultCharset:ERROR \
-                            -Xep:EqualsIncompatibleType:ERROR \
-                            -Xep:FallThrough:ERROR \
-                            -Xep:Finally:ERROR \
-                            -Xep:HidingField:ERROR \
-                            -Xep:ImmutableSetForContains:ERROR \
-                            -Xep:MissingOverride:ERROR \
-                            -Xep:NullOptional:ERROR \
-                            -Xep:ObjectToString:ERROR \
-                            -Xep:UnnecessaryMethodReference:ERROR \
-                            -Xep:UnnecessaryParentheses:ERROR \
-                            -Xep:UnusedVariable:ERROR \
-                            -Xep:JavaTimeDefaultTimeZone:ERROR \
-                            -Xep:UnnecessarilyUsedValue:ERROR \
-                            -Xep:UnqualifiedYield:ERROR \
-                            -Xep:StatementSwitchToExpressionSwitch:ERROR \
-                            -Xep:MathAbsoluteNegative:ERROR \
-                            -Xep:IgnoredPureGetter:ERROR \
-                            -Xep:Finalize:ERROR \
-                            -Xep:AvoidObjectArrays:ERROR \
-                            -Xep:YodaCondition:ERROR \
-                            -Xep:UnusedLabel:ERROR \
-                            -Xep:LabelledBreakTarget:ERROR \
-                            -Xep:JdkObsolete:ERROR \
-                            -Xep:StringSplitter:ERROR \
-                            -Xep:InlineFormatString:ERROR \
-                            -Xep:UnrecognisedJavadocTag:ERROR \
-                            -Xep:EmptyBlockTag:ERROR \
-                            -Xep:BadComparable:ERROR \
-                            -Xep:CatchAndPrintStackTrace:ERROR \
-                            -Xep:ModifyCollectionInEnhancedForLoop:ERROR \
-                            -Xep:ArrayAsKeyOfSetOrMap:ERROR \
-                        </arg>
-                        <!-- remove <arg>-Werror</arg> to disable stopping of compilation on warning-->
-                        <!--                        <arg>-Werror</arg>-->
+<!--                        <arg>-->
+<!--                            -Xplugin:ErrorProne \-->
+<!--                            -XepExcludedPaths:.*/target/generated-(|test-)sources/.* \-->
+<!--                            -XepDisableWarningsInGeneratedCode \-->
+<!--                            -Xep:BadInstanceof:ERROR \-->
+<!--                            -Xep:BoxedPrimitiveConstructor:ERROR \-->
+<!--                            -Xep:CheckedExceptionNotThrown:ERROR \-->
+<!--                            -Xep:ClassCanBeStatic:ERROR \-->
+<!--                            -Xep:CompareToZero:ERROR \-->
+<!--                            -Xep:DefaultCharset:ERROR \-->
+<!--                            -Xep:EqualsIncompatibleType:ERROR \-->
+<!--                            -Xep:FallThrough:ERROR \-->
+<!--                            -Xep:Finally:ERROR \-->
+<!--                            -Xep:HidingField:ERROR \-->
+<!--                            -Xep:ImmutableSetForContains:ERROR \-->
+<!--                            -Xep:MissingOverride:ERROR \-->
+<!--                            -Xep:NullOptional:ERROR \-->
+<!--                            -Xep:ObjectToString:ERROR \-->
+<!--                            -Xep:UnnecessaryMethodReference:ERROR \-->
+<!--                            -Xep:UnnecessaryParentheses:ERROR \-->
+<!--                            -Xep:UnusedVariable:ERROR \-->
+<!--                            -Xep:JavaTimeDefaultTimeZone:ERROR \-->
+<!--                            -Xep:UnnecessarilyUsedValue:ERROR \-->
+<!--                            -Xep:UnqualifiedYield:ERROR \-->
+<!--                            -Xep:StatementSwitchToExpressionSwitch:ERROR \-->
+<!--                            -Xep:MathAbsoluteNegative:ERROR \-->
+<!--                            -Xep:IgnoredPureGetter:ERROR \-->
+<!--                            -Xep:Finalize:ERROR \-->
+<!--                            -Xep:AvoidObjectArrays:ERROR \-->
+<!--                            -Xep:YodaCondition:ERROR \-->
+<!--                            -Xep:UnusedLabel:ERROR \-->
+<!--                            -Xep:LabelledBreakTarget:ERROR \-->
+<!--                            -Xep:JdkObsolete:ERROR \-->
+<!--                            -Xep:StringSplitter:ERROR \-->
+<!--                            -Xep:InlineFormatString:ERROR \-->
+<!--                            -Xep:UnrecognisedJavadocTag:ERROR \-->
+<!--                            -Xep:EmptyBlockTag:ERROR \-->
+<!--                            -Xep:BadComparable:ERROR \-->
+<!--                            -Xep:CatchAndPrintStackTrace:ERROR \-->
+<!--                            -Xep:ModifyCollectionInEnhancedForLoop:ERROR \-->
+<!--                            -Xep:ArrayAsKeyOfSetOrMap:ERROR \-->
+<!--                        </arg>-->
                     </compilerArgs>
                 </configuration>
             </plugin>

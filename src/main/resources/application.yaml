@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: default
+  application:
+    name: InterSwitchBookStore
+  banner:
+    location: classpath:banner.txt
+
+
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookstore
+    username: postgres
+    password:
+
+  #Flyway properties
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
