@@ -2,14 +2,12 @@ package com.onlinebookstore.interswitch.shared.exception;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import jakarta.servlet.http.HttpServletRequest;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.validation.ValidationException;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.postgresql.util.PSQLException;

@@ -1,22 +1,21 @@
 package com.onlinebookstore.interswitch.domain;
 
 import com.onlinebookstore.interswitch.shared.Genre;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-
+import jakarta.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.UUID;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.Max;
 import javax.validation.constraints.NotNull;
-
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,7 +1,6 @@
 package com.onlinebookstore.interswitch.boundary.bookstore.response;
 
 import com.onlinebookstore.interswitch.shared.Genre;
-
 import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.Data;

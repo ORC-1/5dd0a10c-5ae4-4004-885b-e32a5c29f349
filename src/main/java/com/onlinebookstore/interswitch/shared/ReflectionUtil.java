@@ -1,17 +1,17 @@
 package com.onlinebookstore.interswitch.shared;
 
+import static java.lang.String.format;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
 import org.apache.commons.lang3.ArrayUtils;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ReflectionUtils;
 
-import static java.lang.String.format;
 
 
 /**

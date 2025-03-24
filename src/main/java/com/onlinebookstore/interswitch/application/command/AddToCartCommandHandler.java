@@ -7,10 +7,10 @@ import com.onlinebookstore.interswitch.domain.cart.CartItem;
 import com.onlinebookstore.interswitch.domain.cart.CartItemRepository;
 import com.onlinebookstore.interswitch.domain.cart.CartRepository;
 import com.onlinebookstore.interswitch.shared.cqrs.CommandHandler;
+import com.onlinebookstore.interswitch.shared.cqrs.annotations.CommandHandle;
 import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
-import com.onlinebookstore.interswitch.shared.cqrs.annotations.CommandHandle;
 import lombok.RequiredArgsConstructor;
 import org.springframework.transaction.annotation.Transactional;
 
