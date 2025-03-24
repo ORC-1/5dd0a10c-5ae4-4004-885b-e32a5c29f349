@@ -1,7 +1,6 @@
 package com.onlinebookstore.interswitch.domain;
 
 import com.onlinebookstore.interswitch.shared.Genre;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
