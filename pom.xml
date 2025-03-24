@@ -63,6 +63,24 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-hateoas</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>8.0.1.Final</version> <!-- Or latest version -->
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.expressly</groupId>
+            <artifactId>expressly</artifactId>
+            <version>5.0.0</version> <!-- Required for EL parsing -->
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.el</groupId>
+            <artifactId>jakarta.el-api</artifactId>
+            <version>5.0.0</version> <!-- Required for EL evaluation -->
+        </dependency>
         <!-- Database -->
         <dependency>
             <groupId>org.postgresql</groupId>
@@ -136,48 +154,6 @@
                     <showDeprecation>true</showDeprecation>
                     <compilerArgs combine.children="append">
                         <arg>-XDcompilePolicy=simple</arg>
-<!--                        <arg>-->
-<!--                            -Xplugin:ErrorProne \-->
-<!--                            -XepExcludedPaths:.*/target/generated-(|test-)sources/.* \-->
-<!--                            -XepDisableWarningsInGeneratedCode \-->
-<!--                            -Xep:BadInstanceof:ERROR \-->
-<!--                            -Xep:BoxedPrimitiveConstructor:ERROR \-->
-<!--                            -Xep:CheckedExceptionNotThrown:ERROR \-->
-<!--                            -Xep:ClassCanBeStatic:ERROR \-->
-<!--                            -Xep:CompareToZero:ERROR \-->
-<!--                            -Xep:DefaultCharset:ERROR \-->
-<!--                            -Xep:EqualsIncompatibleType:ERROR \-->
-<!--                            -Xep:FallThrough:ERROR \-->
-<!--                            -Xep:Finally:ERROR \-->
-<!--                            -Xep:HidingField:ERROR \-->
-<!--                            -Xep:ImmutableSetForContains:ERROR \-->
-<!--                            -Xep:MissingOverride:ERROR \-->
-<!--                            -Xep:NullOptional:ERROR \-->
-<!--                            -Xep:ObjectToString:ERROR \-->
-<!--                            -Xep:UnnecessaryMethodReference:ERROR \-->
-<!--                            -Xep:UnnecessaryParentheses:ERROR \-->
-<!--                            -Xep:UnusedVariable:ERROR \-->
-<!--                            -Xep:JavaTimeDefaultTimeZone:ERROR \-->
-<!--                            -Xep:UnnecessarilyUsedValue:ERROR \-->
-<!--                            -Xep:UnqualifiedYield:ERROR \-->
-<!--                            -Xep:StatementSwitchToExpressionSwitch:ERROR \-->
-<!--                            -Xep:MathAbsoluteNegative:ERROR \-->
-<!--                            -Xep:IgnoredPureGetter:ERROR \-->
-<!--                            -Xep:Finalize:ERROR \-->
-<!--                            -Xep:AvoidObjectArrays:ERROR \-->
-<!--                            -Xep:YodaCondition:ERROR \-->
-<!--                            -Xep:UnusedLabel:ERROR \-->
-<!--                            -Xep:LabelledBreakTarget:ERROR \-->
-<!--                            -Xep:JdkObsolete:ERROR \-->
-<!--                            -Xep:StringSplitter:ERROR \-->
-<!--                            -Xep:InlineFormatString:ERROR \-->
-<!--                            -Xep:UnrecognisedJavadocTag:ERROR \-->
-<!--                            -Xep:EmptyBlockTag:ERROR \-->
-<!--                            -Xep:BadComparable:ERROR \-->
-<!--                            -Xep:CatchAndPrintStackTrace:ERROR \-->
-<!--                            -Xep:ModifyCollectionInEnhancedForLoop:ERROR \-->
-<!--                            -Xep:ArrayAsKeyOfSetOrMap:ERROR \-->
-<!--                        </arg>-->
                     </compilerArgs>
                 </configuration>
             </plugin>
