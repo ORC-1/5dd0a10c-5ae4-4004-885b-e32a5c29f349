@@ -1,6 +1,5 @@
 package com.onlinebookstore.interswitch.application.query;
 
-import com.onlinebookstore.interswitch.boundary.checkout.response.OrderItemResource;
 import com.onlinebookstore.interswitch.boundary.checkout.response.OrderResource;
 import com.onlinebookstore.interswitch.domain.Book;
 import com.onlinebookstore.interswitch.domain.checkout.OrderItem;
@@ -47,7 +46,7 @@ class PurchaseHistoryQueryHandlerTest {
     }
 
     @Test
-    void execute_ShouldReturnMappedOrderResources_WhenOrdersAreFound() {
+    void ShouldReturnMappedOrderResourcesWhenOrdersAreFound() {
         // Given
 
         Orders order = new Orders();
@@ -87,7 +86,7 @@ class PurchaseHistoryQueryHandlerTest {
     }
 
     @Test
-    void execute_ShouldReturnEmptyPage_WhenNoOrdersAreFound() {
+    void ShouldReturnEmptyPageWhenNoOrdersAreFound() {
         // Given
         Page<Orders> emptyOrderPage = new PageImpl<>(Collections.emptyList(), pageable, 0);
 
@@ -104,7 +103,7 @@ class PurchaseHistoryQueryHandlerTest {
     }
 
     @Test
-    void execute_ShouldThrowException_WhenBothUserIdAndSessionIdAreNull() {
+    void ShouldThrowExceptionWhenBothUserIdAndSessionIdAreNull() {
         // Given & When
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             queryHandler.execute(new PurchaseHistoryQuery(null, null, pageable));
