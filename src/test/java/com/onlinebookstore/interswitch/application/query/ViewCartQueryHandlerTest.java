@@ -37,6 +37,7 @@ class ViewCartQueryHandlerTest {
     @Test
     void execute_ShouldReturnCart_WhenCartExists() {
         UUID cartId = UUID.randomUUID();
+
         // Given
         Cart cart = new Cart();
         cart.setId(cartId);

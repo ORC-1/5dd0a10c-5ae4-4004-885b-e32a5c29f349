@@ -48,7 +48,6 @@ class PurchaseHistoryQueryHandlerTest {
     @Test
     void ShouldReturnMappedOrderResourcesWhenOrdersAreFound() {
         // Given
-
         Orders order = new Orders();
         order.setId(UUID.randomUUID());
         order.setUserId(userId);
