@@ -23,6 +23,7 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 
 @RestControllerAdvice
@@ -68,6 +69,21 @@ public class GlobalExceptionHandler {
                         .build(), HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
+    public ResponseEntity<ApiError> methodArgumentTypeMismatchException(
+            MethodArgumentTypeMismatchException ex,
+            HttpServletRequest request) {
+        log.error(ex.getLocalizedMessage() + "MethodArgumentTypeMismatchException exception : " + FOR + request.getRequestURI());
+        List<String> errors = Arrays.asList(ex.getMessage());
+        return new ResponseEntity<>(
+                ApiError.builder()
+                        .errorMessage(errors)
+                        .errorCode(HttpStatus.BAD_REQUEST.toString())
+                        .request(request.getRequestURI())
+                        .requestType(request.getMethod())
+                        .customMessage(INVALID_REQUEST)
+                        .build(), HttpStatus.BAD_REQUEST);
+    }
     @ExceptionHandler({DataIntegrityViolationException.class})
     public ResponseEntity<ApiError> dataIntegrityViolationException(DataIntegrityViolationException ex,
                                                                     HttpServletRequest request) {
