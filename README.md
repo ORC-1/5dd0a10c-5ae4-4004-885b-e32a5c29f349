@@ -51,8 +51,9 @@ mvn spring-boot:run
 
 ### IntelliJ
 1. Open the project in IntelliJ.
-2. Navigate to the **Application.java** file.
+2. Navigate to the **InterswitchApplication.java** file.
 3. Click **Run as Spring Boot App**.
+4. Or You can click the play button at the top right after dependencies has been fully resolved.
 
 ## Accessing the Application
 - Swagger UI: [http://localhost:8080/swagger-ui/index.html#/](http://localhost:8080/swagger-ui/index.html#/)
