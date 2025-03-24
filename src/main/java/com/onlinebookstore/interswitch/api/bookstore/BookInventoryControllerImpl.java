@@ -20,9 +20,9 @@ public class BookInventoryControllerImpl implements BookInventoryController {
 
     @Override
     public Page<BookResource> searchBooks(String title, String author, Integer year, Genre genre, Pageable pageable) {
-        if (title == null && author == null && year == null && genre == null) {
+        if (title == null && author == null && year == null && genre == null)
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "At least one search parameter is required.");
-        }
+
         return queryGate.handle(new BookSearchQuery(title, author, year, genre, pageable));
     }
 }

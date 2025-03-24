@@ -24,6 +24,8 @@ public class BookResourceMapper {
         resource.setIsbn(book.getIsbn());
         resource.setAuthor(book.getAuthor());
         resource.setPublicationYear(book.getPublicationYear());
+        resource.setPrice(book.getPrice());
+        resource.setStockQuantity(book.getStockQuantity());
         return resource;
     }
 }
